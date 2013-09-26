@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>477</width>
-    <height>479</height>
+    <width>469</width>
+    <height>462</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -84,7 +84,7 @@
   <widget class="QCheckBox" name="ck_use_sampling">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>290</x>
      <y>70</y>
      <width>211</width>
      <height>17</height>

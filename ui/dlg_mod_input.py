@@ -26,6 +26,7 @@ from ui.constants import logUICall, UI_PADDING
 from ui.qt.dlg_mod_input_ui import Ui_modifierInputDialog
 from ui.helper.ms_level_table import MSLevelTableModel
 from ui.helper.ms_tree import MSTreeModel
+from ui.helper.ms_attr_delegate import MSAttributeItemDelegate
 
 from ui.dlg_edit_attributes import DialogEditAttributes
 
@@ -56,6 +57,7 @@ class DialogModInput(Ui_modifierInputDialog, QDialog):
         # connect slots (ui events)
         self.ui.btn_add.clicked.connect(self.addValue)
         self.ui.btn_delete.clicked.connect(self.deleteValue)
+        self.ui.btn_range.clicked.connect(self.editRanges)
         self.ui.btn_apply.clicked.connect(self.setModifier)
         self.ui.btn_cancel.clicked.connect(self.reject)        
         self.ui.cb_attributes.currentIndexChanged[str].connect(self.setModifierName)
@@ -179,24 +181,65 @@ class DialogModInput(Ui_modifierInputDialog, QDialog):
     @logUICall
     @pyqtSlot(str)
     def setModifierName(self, selected_val):        
+        if selected_val == '':
+            return
         self.modifier_name = selected_val
+        taxonomy = self.ms.taxonomy
+        attr_grp = taxonomy.get_attribute_group_by_name(selected_val)
+        attr = attr_grp.attributes[0]
+        self.valid_codes = {}
+        if attr.type == 2: # numeric type that can have ranges
+            if self.ranges.has_key(str(attr.name)):
+                ranges = self.ranges[str(attr.name)]                
+
+                # add all ranges to list of codes for drop-down
+                for min_val, max_val in map(None, ranges['min_values'], ranges['max_values']):
+                    value = attr.make_string([min_val, max_val])
+                    self.valid_codes[value] = value
+    
+                # test for range [0,0], which is the unknown case
+                if ranges['min_values'] >0 and ranges['max_values']>0:
+                    value = attr.make_string([None, None])
+                    self.valid_codes[value] = value                    
+            #else:
+                # allow user use default edit feature
+                            
+            # enable button for editing ranges
+            self.ui.btn_range.setEnabled(True)
+        else:
+            self.ui.btn_range.setEnabled(False)
+        self.ui.btn_add.setEnabled(True)
+        self.ui.btn_delete.setEnabled(True)
+            
+    @logUICall 
+    @pyqtSlot()     
+    def editRanges(self):
+        attribute_name = str(self.ui.cb_attributes.currentText())
+        
+        if self.app.setRange(self.ranges, attribute_name):
+            self.setModifierName(self.ui.cb_attributes.currentText())               
     
     @logUICall
     @pyqtSlot(QObject)
     def editModValue(self, index):
         try:
-            if index.column() == 0:
-                taxonomy = self.ms.taxonomy
-                attr_grp = taxonomy.get_attribute_group_by_name(str(self.ui.cb_attributes.currentText()))
-                if attr_grp is not None:
-                    index.model().set_cell_editable(index.column(), index.row(), False)
-                    edit_dlg = DialogEditAttributes(self.app,
-                                                    taxonomy, attr_grp,
-                                                    self.node, str(index.data().toString()))
-                    if edit_dlg.exec_() == QDialog.Accepted:
-                        index.model().setData(index, QVariant(edit_dlg.modifier_value), Qt.EditRole)
-                else:
-                    index.model().set_cell_editable(index.column(), index.row())            
+            if index.column() == 0: # taxonomy input requires dialogs                
+                if len(self.valid_codes) > 0:   # range set, can use drop-down
+                    attr_editor = MSAttributeItemDelegate(self.ui.table_mod_values, self.valid_codes, 0)
+                    self.ui.table_mod_values.setItemDelegateForColumn(0, attr_editor)
+                    index.model().set_cell_editable(index.column(), index.row())
+                else:                           # no range setup, must use helper dialog
+                    taxonomy = self.ms.taxonomy
+                    attr_grp = taxonomy.get_attribute_group_by_name(str(self.ui.cb_attributes.currentText()))
+                    if attr_grp is not None:
+                        index.model().set_cell_editable(index.column(), index.row(), False)
+                        edit_dlg = DialogEditAttributes(self.app,
+                                                        taxonomy, attr_grp,
+                                                        self.node, str(index.data().toString()))
+                        if edit_dlg.exec_() == QDialog.Accepted:
+                            index.model().setData(index, QVariant(edit_dlg.modifier_value), Qt.EditRole)
+                    else:
+                        index.model().set_cell_editable(index.column(), index.row())
         except Exception, err:
             logUICall.log(err, logUICall.ERROR)
 
@@ -204,7 +247,7 @@ class DialogModInput(Ui_modifierInputDialog, QDialog):
     ###############################
         
     @logUICall
-    def setNode(self, ms, mod, addNew=False):
+    def setNode(self, ms, mod, ranges, addNew=False):
         """ 
         shows values/weights in table_mod_values for given node
         if addNew values/weights are two empty lists 
@@ -212,6 +255,7 @@ class DialogModInput(Ui_modifierInputDialog, QDialog):
         """ 
         self.ms = ms
         self.mod = mod        
+        self.ranges = ranges
         self.addNew = addNew
         self.values = []
         self.weights = []

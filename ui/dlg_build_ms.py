@@ -38,9 +38,9 @@ class DialogMSOptions(Ui_msOptionsDialog, QDialog):
         self.app = app
 
         self.attributeList = WidgetAttributeList(self, app, taxonomy, [], ranges)
-        self.attributeList.move(30, 90)
-        self.attributeList.setFixedSize(self.width() - 30 - 2*UI_PADDING, 
-                                        self.ui.buttons.y() - 90 - 2*UI_PADDING)
+        self.attributeList.move(UI_PADDING, 90)
+        self.attributeList.setFixedSize(self.width() - 2*UI_PADDING, 
+                                        self.ui.buttons.y() - 60 - 3*UI_PADDING)
         
         # connect slot (ui event)
         self.ui.buttons.accepted.connect(self.accept)

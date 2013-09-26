@@ -180,7 +180,7 @@
    <widget class="QPushButton" name="btn_add">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>30</x>
       <y>0</y>
       <width>31</width>
       <height>23</height>
@@ -200,7 +200,7 @@
    <widget class="QPushButton" name="btn_delete">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>60</x>
       <y>0</y>
       <width>31</width>
       <height>23</height>
@@ -215,6 +215,26 @@
     <property name="icon">
      <iconset resource="resources/SIDDResource.qrc">
       <normaloff>:/imgs/icons/minus.png</normaloff>:/imgs/icons/minus.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_range">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>0</y>
+      <width>30</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Edit Value Grouping</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resources/SIDDResource.qrc">
+      <normaloff>:/imgs/icons/cog.png</normaloff>:/imgs/icons/cog.png</iconset>
     </property>
    </widget>
   </widget>

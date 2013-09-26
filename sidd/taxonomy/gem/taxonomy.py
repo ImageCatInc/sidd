@@ -162,39 +162,9 @@ class GemTaxonomy(Taxonomy):
         return True
 
     @logAPICall
-    def to_string2(self, taxonomy_values, order_attributes=False, fill_missing=False):
-        """ serialize a set of taxonomy values into GEM specific taxonomy string """
-        vals = self.parse("/".join([str(n) for n in taxonomy_values]))        
-        if (fill_missing):
-            to_add = [g.name for g in self.attribute_groups]
-            for v in vals:
-                try:
-                    to_add.remove(v.code.attribute.group.name)
-                except:
-                    pass
-            str_add = []
-            for name in to_add:
-                str_add.append(self.get_attribute_group_by_name(name).default)
-            vals = vals + self.parse("/".join(str_add))
-            order_attributes=True
-
-        if (order_attributes):
-            vals.sort(key=attrgetter('code.attribute.group.order'))
-        
-        out_str = []
-        for idx, v in enumerate(vals):
-            if idx > 0:
-                if v.code.attribute.group.order == vals[idx-1].code.attribute.group.order:
-                    out_str.append(GemTaxonomyAttribute.Separator)
-                else:
-                    out_str.append(GemTaxonomyAttributeGroup.Separator)
-            out_str.append(str(v))
-        return "".join(out_str)
- 
-    @logAPICall
     def to_string(self, taxonomy_values, order_attributes=False, fill_missing=False):
         """ serialize a set of taxonomy values into GEM specific taxonomy string """
-        vals = self.parse("/".join([str(n) for n in taxonomy_values]))
+        vals = self.parse("/".join([str(n) for n in taxonomy_values if n is not None]))
         if not order_attributes:
             out_str = []
             for idx, v in enumerate(vals):
@@ -251,7 +221,7 @@ class GemTaxonomy(Taxonomy):
         c.execute(sql)
         output_str = []
         for row in c:
-            output_str.append(str(row[1]))                  
+            output_str.append(str(row[1]))
         self._output_str = output_str[:3]+output_str
         sql = """
             select g.order_in_basic,  g.attribute, max(a.level) levels, g.format
@@ -270,11 +240,11 @@ class GemTaxonomy(Taxonomy):
             
         # load attributes
         sql = """
-            select a.name, a.level, g.attribute, a.format, a.lookup_table
+            select a.name, a.level, g.attribute, a.format, a.lookup_table, a.default_value
             from dic_gem_attributes g
             inner join dic_gem_attribute_levels a on g.attribute=a.attribute 
             where order_in_basic <> '' 
-            group by a.name, a.level, g.attribute, a.lookup_table, a.format
+            group by a.name, a.level, g.attribute, a.lookup_table, a.format, a.default_value
             order by g.order_in_basic, a.level
         """
         c.execute(sql)
@@ -282,7 +252,7 @@ class GemTaxonomy(Taxonomy):
         for row in c:
             grp = self.get_attribute_group_by_name(str(row[2]).strip())
             attr = GemTaxonomyAttribute(str(row[0]).strip(), grp, 
-                                        int(row[1]), None, int(row[3]))
+                                        int(row[1]), str(row[5]), int(row[3]))
             attr.lookup_table = str(row[4])
             grp.add_attribute(attr)
             self.__attrs.append(attr)

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt\dlg_about.ui'
 #
-# Created: Mon May 20 14:37:48 2013
+# Created: Thu Sep 26 14:47:48 2013
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_DialogAbout(object):
     def setupUi(self, DialogAbout):
         DialogAbout.setObjectName(_fromUtf8("DialogAbout"))
-        DialogAbout.resize(400, 461)
+        DialogAbout.resize(397, 452)
         self.buttonBox = QtGui.QDialogButtonBox(DialogAbout)
         self.buttonBox.setGeometry(QtCore.QRect(300, 410, 81, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -57,7 +57,11 @@ class Ui_DialogAbout(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">Version: $version<br />Last updated: $lastupdate</span></p>\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">SIDD (Spatial Inventory Data Developer) is developed from GEM Inventory and Damage Capture Tools effort. It is part of a collection of tools that can be used for development of exposure datasets and models at the sub-national level, for exposure dataset development per-building and to capture earthquake consequences per-building </span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        self.lb_copyright.setText(QtGui.QApplication.translate("DialogAbout", "<p>Copyright &reg; ImageCat Inc. 2013.</p>", None, QtGui.QApplication.UnicodeUTF8))
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">SIDD (Spatial Inventory Data Developer) is developed from GEM Inventory Data Capture Tools effort. It is part of a collection of tools that can be used for development of exposure datasets and models at the sub-national level, for exposure dataset development per-building and to capture earthquake consequences per-building </span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.lb_copyright.setText(QtGui.QApplication.translate("DialogAbout", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">Copyright ® GEM Foundation and ImageCat Inc. 2013.</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
 
 import SIDDResource_rc

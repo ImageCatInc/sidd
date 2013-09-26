@@ -167,7 +167,7 @@ class DialogEditMS(Ui_editMSDialog, QDialog):
                 # allow user use default edit feature
                             
             # enable button for editing ranges 
-            self.ui.btn_range.setEnabled(True)
+            self.ui.btn_range.setEnabled(True)                        
         else:               # code only types that cannot have ranges 
             try:
                 node = self.node
@@ -198,7 +198,6 @@ class DialogEditMS(Ui_editMSDialog, QDialog):
         self.ui.btn_add.setEnabled(allow_add)
         self.ui.btn_apply.setEnabled(allow_add)
         self.ui.btn_delete.setEnabled(allow_add)
-        self.ui.btn_range.setEnabled(allow_add)
         self.ui.btn_save.setEnabled(allow_add)            
 
     # public methods    

@@ -80,7 +80,7 @@ class WidgetSecondaryModifier(Ui_widgetSecondaryModifier, QWidget):
         """ add a modifier to mapping scheme. update table view """
         
         # show edit dialog box for new modifier
-        self.dlgEditMod.setNode(self.ms, None, addNew=True)
+        self.dlgEditMod.setNode(self.ms, None, self.app.project.operator_options, addNew=True)
         ans = self.dlgEditMod.exec_()
         
         # accepted means apply change
@@ -128,7 +128,7 @@ class WidgetSecondaryModifier(Ui_widgetSecondaryModifier, QWidget):
             return
         
         # show edit dialog box for selected modifier
-        self.dlgEditMod.setNode(self.ms, mod)
+        self.dlgEditMod.setNode(self.ms, mod, self.app.project.operator_options)
         ans = self.dlgEditMod.exec_()
         
         # accepted means apply change

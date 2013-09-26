@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt\dlg_mod_input.ui'
 #
-# Created: Thu Apr 25 17:06:39 2013
+# Created: Thu Sep 26 10:10:22 2013
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -70,19 +70,26 @@ class Ui_modifierInputDialog(object):
         self.widget_mod_values_menu_r.setGeometry(QtCore.QRect(310, 100, 121, 31))
         self.widget_mod_values_menu_r.setObjectName(_fromUtf8("widget_mod_values_menu_r"))
         self.btn_add = QtGui.QPushButton(self.widget_mod_values_menu_r)
-        self.btn_add.setGeometry(QtCore.QRect(60, 0, 31, 23))
+        self.btn_add.setGeometry(QtCore.QRect(30, 0, 31, 23))
         self.btn_add.setText(_fromUtf8(""))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/imgs/icons/add.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_add.setIcon(icon)
         self.btn_add.setObjectName(_fromUtf8("btn_add"))
         self.btn_delete = QtGui.QPushButton(self.widget_mod_values_menu_r)
-        self.btn_delete.setGeometry(QtCore.QRect(90, 0, 31, 23))
+        self.btn_delete.setGeometry(QtCore.QRect(60, 0, 31, 23))
         self.btn_delete.setText(_fromUtf8(""))
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(_fromUtf8(":/imgs/icons/minus.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_delete.setIcon(icon1)
         self.btn_delete.setObjectName(_fromUtf8("btn_delete"))
+        self.btn_range = QtGui.QPushButton(self.widget_mod_values_menu_r)
+        self.btn_range.setGeometry(QtCore.QRect(90, 0, 30, 23))
+        self.btn_range.setText(_fromUtf8(""))
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(_fromUtf8(":/imgs/icons/cog.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_range.setIcon(icon2)
+        self.btn_range.setObjectName(_fromUtf8("btn_range"))
         self.cb_attributes = QtGui.QComboBox(modifierInputDialog)
         self.cb_attributes.setGeometry(QtCore.QRect(200, 70, 231, 22))
         self.cb_attributes.setObjectName(_fromUtf8("cb_attributes"))
@@ -108,6 +115,7 @@ class Ui_modifierInputDialog(object):
         self.lb_total_weights.setText(QtGui.QApplication.translate("modifierInputDialog", "Total", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_add.setToolTip(QtGui.QApplication.translate("modifierInputDialog", "Add Modifier", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_delete.setToolTip(QtGui.QApplication.translate("modifierInputDialog", "Delete Selected Modifier", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_range.setToolTip(QtGui.QApplication.translate("modifierInputDialog", "Edit Value Grouping", None, QtGui.QApplication.UnicodeUTF8))
         self.lb_attribute.setText(QtGui.QApplication.translate("modifierInputDialog", "Attribute", None, QtGui.QApplication.UnicodeUTF8))
 
 import SIDDResource_rc

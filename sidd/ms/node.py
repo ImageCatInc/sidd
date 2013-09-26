@@ -257,6 +257,8 @@ class StatisticNode (object):
         """ construct node and children from XML """  
         self.name = get_node_attrib(xmlnode, 'attribute')      
         self.value = get_node_attrib(xmlnode, 'value')
+        if str(self.value) == 'None':
+            self.value = None
         self.level = int(get_node_attrib(xmlnode, 'level'))
         self.weight = float(get_node_attrib(xmlnode, 'weight'))
         self.count = self.weight
@@ -451,8 +453,8 @@ class StatisticNode (object):
         # handle default cases
         is_default = False                
         if value is None:
-            is_default = True 
-        elif value is not None and (str(value) == value.attribute.default or str(value) == value.attribute.group.default):
+            is_default = True
+        elif value is not None and (str(value).strip() == '' or str(value) == value.attribute.default or str(value) == value.attribute.group.default):
             value = None
             is_default = True                       
         

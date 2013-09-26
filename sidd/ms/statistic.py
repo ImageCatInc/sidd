@@ -99,7 +99,7 @@ class Statistics (object):
         # parse string
         bldg_attrs = self.taxonomy.parse(taxstr)
         # update tree starting from root
-        for i in range(add_times):
+        for i in xrange(add_times):
             self.root.add(bldg_attrs, parse_order, 0, additional_data)
 
     @logAPICall

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt\dlg_build_ms.ui'
 #
-# Created: Tue Jul 23 15:45:15 2013
+# Created: Wed Sep 25 14:28:27 2013
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_msOptionsDialog(object):
     def setupUi(self, msOptionsDialog):
         msOptionsDialog.setObjectName(_fromUtf8("msOptionsDialog"))
-        msOptionsDialog.resize(477, 479)
+        msOptionsDialog.resize(469, 462)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -43,7 +43,7 @@ class Ui_msOptionsDialog(object):
         self.lb_title.setFont(font)
         self.lb_title.setObjectName(_fromUtf8("lb_title"))
         self.ck_use_sampling = QtGui.QCheckBox(msOptionsDialog)
-        self.ck_use_sampling.setGeometry(QtCore.QRect(300, 70, 211, 17))
+        self.ck_use_sampling.setGeometry(QtCore.QRect(290, 70, 211, 17))
         self.ck_use_sampling.setObjectName(_fromUtf8("ck_use_sampling"))
 
         self.retranslateUi(msOptionsDialog)
